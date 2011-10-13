@@ -69,8 +69,8 @@ if ( isenabled( $Config{'trapping'}{'detection'} ) && $monitor_int && $Config{'t
         "-N -D -l $install_dir/var --pid-path $install_dir/var/run";
 } elsif ( isenabled( $Config{'trapping'}{'detection'} ) && $monitor_int && $Config{'trapping'}{'detection_engine'} eq 'suricata' ) {
     $flags{'suricata'} =
-        "-c $install_dir/var/conf/suricata.yaml -i $monitor_int" . 
-        "-l $install_dir/var --pidfile $install_dir/var/run";
+        "-D -c $install_dir/var/conf/suricata.yaml -i $monitor_int " . 
+        "-l $install_dir/var --pidfile $install_dir/var/run/suricata.pid";
 }
 
 =head1 SUBROUTINES
