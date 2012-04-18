@@ -40,6 +40,7 @@ use pf::class qw(class_view_all class_merge);
 use pf::services::apache;
 use pf::services::dhcpd qw(generate_dhcpd_conf);
 use pf::services::named qw(generate_named_conf);
+use pf::services::radiusd qw(generate_radiusd_conf);
 use pf::services::snmptrapd qw(generate_snmptrapd_conf);
 use pf::SwitchFactory;
 
@@ -59,7 +60,7 @@ $flags{'pfsetvlan'}      = "-d &";
 $flags{'dhcpd'} = " -lf $var_dir/dhcpd/dhcpd.leases -cf $generated_conf_dir/dhcpd.conf " . join(" ", @listen_ints);
 $flags{'named'} = "-u pf -c $generated_conf_dir/named.conf";
 $flags{'snmptrapd'} = "-n -c $generated_conf_dir/snmptrapd.conf -C -A -Lf $install_dir/logs/snmptrapd.log -p $install_dir/var/run/snmptrapd.pid -On";
-$flags{'radiusd'} = "";
+$flags{'radiusd'} = "-d $install_dir/var/radiusd/";
 
 if ( isenabled( $Config{'trapping'}{'detection'} ) && $monitor_int ) {
     $flags{'snort'} = 
@@ -113,6 +114,7 @@ sub service_ctl {
                         'dhcpd' => \&generate_dhcpd_conf,
                         'snort' => \&generate_snort_conf,
                         'httpd' => \&generate_httpd_conf,
+                        'radiusd' => \&generate_radiusd_conf,
                         'snmptrapd' => \&generate_snmptrapd_conf
                     );
                     if ( $serviceHash{$daemon} ) {
