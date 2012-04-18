@@ -61,6 +61,9 @@ Requires: libpcap, libxml2, zlib, zlib-devel, glibc-common,
 Requires: httpd, mod_ssl, php, php-gd
 Requires: mod_perl
 Requires: dhcp, bind
+# FreeRADIUS version >= 2.1.12 and the name changed between the RHEL 5 and 6 releases
+%{?el5:Requires freeradius2 >= 2.1.12}
+%{?el6:Requires freeradius >= 2.1.12}
 # php-pear-Log required not php-pear, fixes #804
 Requires: php-pear-Log
 Requires: net-tools
@@ -673,6 +676,7 @@ fi
 * Tue Apr 17 2012 Francois Gaudreault <fgaudreault@inverse.ca>
 - Dropped configuration package for FR.  We now have everything
 in /usr/local/pf
+
 * Thu Apr 16 2012 Olivier Bilodeau <obilodeau@inverse.ca> - 3.3.1-1
 - New release 3.3.1
 
