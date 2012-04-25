@@ -60,7 +60,7 @@ $flags{'pfsetvlan'}      = "-d &";
 $flags{'dhcpd'} = " -lf $var_dir/dhcpd/dhcpd.leases -cf $generated_conf_dir/dhcpd.conf " . join(" ", @listen_ints);
 $flags{'named'} = "-u pf -c $generated_conf_dir/named.conf";
 $flags{'snmptrapd'} = "-n -c $generated_conf_dir/snmptrapd.conf -C -A -Lf $install_dir/logs/snmptrapd.log -p $install_dir/var/run/snmptrapd.pid -On";
-$flags{'radiusd'} = "-d $install_dir/var/radiusd/";
+$flags{'radiusd'} = "-d $install_dir/raddb/";
 
 if ( isenabled( $Config{'trapping'}{'detection'} ) && $monitor_int ) {
     $flags{'snort'} = 
