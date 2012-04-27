@@ -114,7 +114,6 @@ Requires: perl(Net::SNMP)
 Requires: perl(Crypt::Rijndael)
 Requires: perl(Net::Telnet)
 Requires: perl(Net::Write)
-Requires: perl(Parse::Nessus::NBE)
 Requires: perl(Parse::RecDescent)
 # Note: portability for non-x86 is questionnable for Readonly::XS
 Requires: perl(Readonly), perl(Readonly::XS)
