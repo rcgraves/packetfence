@@ -87,9 +87,10 @@ Requires: perl(Time::HiRes)
 %{?el5:Requires: perl(IPTables::libiptc) = 0.14}
 %{?el6:Requires: perl(IPTables::libiptc)}
 Requires: perl(Net::LDAP)
-# TODO: we depend on perl modules not perl-libwww-perl
+# TODO: we should depend on perl modules not perl-libwww-perl package
 # find out what they are and specify them as perl(...::...) instead of perl-libwww-perl
-Requires: perl-libwww-perl
+# LWP::Simple is one of them (required by inlined Net::MAC::Vendor and probably other stuff)
+Requires: perl-libwww-perl, perl(LWP::Simple)
 Requires: perl(List::MoreUtils)
 Requires: perl(Locale::gettext)
 Requires: perl(Log::Log4perl) >= 1.11
@@ -100,7 +101,6 @@ Requires: perl(Net::Appliance::Session) = 1.36
 # Required by configurator script, pf::config
 Requires: perl(Net::Interface)
 Requires: perl(Net::Frame), perl(Net::Frame::Simple)
-Requires: perl(Net::MAC::Vendor)
 Requires: perl(Net::Netmask)
 # pfmon, pfdhcplistener
 Requires: perl(Net::Pcap) >= 0.16
@@ -663,6 +663,7 @@ fi
                         /usr/local/pf/lib/IPTables/Interface.pm
 %dir                    /usr/local/pf/lib/IPTables/Interface/
                         /usr/local/pf/lib/IPTables/Interface/Lock.pm
+                        /usr/local/pf/lib/Net
 %dir                    /usr/local/pf/lib/pf
                         /usr/local/pf/lib/pf/*.pm
 %dir                    /usr/local/pf/lib/pf/billing
