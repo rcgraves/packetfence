@@ -48,7 +48,7 @@ Depends: ${misc:Depends}, apache2, apache2.2-common, apache2-utils,
  libparse-nessus-nbe-perl, libphp-session-perl, libtest-mockdbi-perl,
  gettext, vlan, libsoap-lite-perl, libio-interface-perl, libcatalyst-perl,
  libcatalyst-plugin-statusmessage, libcatalyst-perl, libcatalyst-modules-perl,
- libcatalyst-view-tt-perl, libhtml-formfu-perl, libjson-perl
+ libcatalyst-view-tt-perl, libhtml-formfu-perl, libjson-perl, libmodule-install-perl
 Description: PacketFence network registration / worm mitigation system
  PacketFence is an open source network access control (NAC) system.
  It can be used to effectively secure networks, from small to very large
