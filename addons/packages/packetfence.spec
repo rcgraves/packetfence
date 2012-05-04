@@ -36,6 +36,7 @@ URL: http://www.packetfence.org
 AutoReqProv: 0
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{rev}-root
+%define debug_package %{nil}
 
 Packager: Inverse inc. <support@inverse.ca>
 Vendor: PacketFence, http://www.packetfence.org
@@ -191,6 +192,16 @@ Summary: Configuration pack for FreeRADIUS 2
 The freeradius2-packetfence package contains the files needed to
 make FreeRADIUS properly interact with PacketFence
 
+%package perl-suid
+Group: System Environment/Daemons
+BuildRequires: gcc
+AutoReqProv: 0
+Summary: Replace pfcmd by a C wrapper for suid
+
+%description perl-suid
+The packetfence-perl-suid is a C wrapper to replace perl-suid dependencie.
+See https://bugzilla.redhat.com/show_bug.cgi?id=611009
+
 %prep
 %setup -q
 
@@ -226,6 +237,8 @@ fop -c docs/fonts/fop-config.xml -xml docs/docbook/pf-devel-guide.xml \
     -xsl docs/docbook/xsl/packetfence-fo.xsl \
     -pdf docs/PacketFence_Developers_Guide.pdf
 %endif
+# build pfcmd C wrapper
+gcc -g0 src/pfcmd.c -o bin/pfcmd
 
 %install
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -529,7 +542,7 @@ fi
 %dir                    /usr/local/pf/addons/watchdog
 %attr(0755, pf, pf)     /usr/local/pf/addons/watchdog/*.sh
 %dir                    /usr/local/pf/bin
-%attr(6755, root, root) /usr/local/pf/bin/pfcmd
+%attr(6755, root, root) /usr/local/pf/bin/pfcmd.pl
 %attr(0755, pf, pf)     /usr/local/pf/bin/pfcmd_vlan
 %doc                    /usr/local/pf/ChangeLog
 %dir                    /usr/local/pf/conf
@@ -752,6 +765,9 @@ fi
 %config(noreplace)                         /etc/raddb/sites-available/packetfence
 %config(noreplace)                         /etc/raddb/sites-available/packetfence-soh
 %config(noreplace)                         /etc/raddb/sites-available/packetfence-tunnel
+
+%files perl-suid
+%attr(6755, root, root) /usr/local/pf/bin/pfcmd
 
 %changelog
 * Thu Apr 23 2012 Olivier Bilodeau <obilodeau@inverse.ca> - 3.3.2-1
