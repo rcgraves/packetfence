@@ -23,6 +23,9 @@ use Catalyst qw/
     StatusMessage
 /;
 
+use constant INSTALL_DIR => '/usr/local/pf';
+use lib INSTALL_DIR . "/lib";
+
 extends 'Catalyst';
 
 our $VERSION = '0.01';
