@@ -27,6 +27,7 @@ Enhancements
  * debian support: arp binary location now configurable ([services].arp_binary)
  * Minimal performance improvements to bin/pfcmd startup
  * Less dependencies on hard to find packages (dropped or integrated)
+ * simplify configuration: some default values provided for networks.conf
 
 Bug Fixes
  * RADIUS-based Disconnects not working for Aruba, AeroHIVE. Introduced in 3.3.2. (#1437)
