@@ -17,6 +17,7 @@ use MIME::Lite;
 use POSIX;
 use Readonly;
 use Time::HiRes qw(time);
+use Try::Tiny;
 
 use pf::config;
 use pf::db;
@@ -291,16 +292,17 @@ sub send_sms {
         Data        =>  "PIN: $pin"
     );
 
-    my $result = 0;
-    eval {
+    # TODO if ->send returns a sane code we could use the short try {} catch syntax
+    #      my $result = try { ... } catch { ... };
+    my $result = $FALSE;
+    try {
       $msg->send('smtp', $smtpserver, Timeout => 20);
       $result = $msg->last_send_successful();
-    };
-    if ($@) {
-      my $msg = "Can't send email to $email: $@";
-      $msg =~ s/\n//g;
-      $logger->error($msg);
     }
+    catch {
+      chomp($_);
+      $logger->error("Can't send email to $email: $_");
+    };
     
     return $result;
 }
