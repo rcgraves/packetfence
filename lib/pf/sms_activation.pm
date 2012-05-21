@@ -296,12 +296,12 @@ sub send_sms {
     #      my $result = try { ... } catch { ... };
     my $result = $FALSE;
     try {
-      $msg->send('smtp', $smtpserver, Timeout => 20);
-      $result = $msg->last_send_successful();
+        $msg->send('smtp', $smtpserver, Timeout => 20);
+        $result = $msg->last_send_successful();
     }
     catch {
-      chomp($_);
-      $logger->error("Can't send email to $email: $_");
+        chomp($_);
+        $logger->error("Can't send email to $email: $_");
     };
     
     return $result;
