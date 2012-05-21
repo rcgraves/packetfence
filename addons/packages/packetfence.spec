@@ -132,7 +132,7 @@ Requires: perl(YAML)
 Requires: php-ldap
 Requires: perl(Try::Tiny)
 Requires: perl(Crypt::GeneratePassword)
-Requires: perl(MIME::Lite::TT)
+Requires: perl(MIME::Lite), perl(MIME::Lite::TT)
 Requires: perl(Cache::Cache), perl(HTML::Parser)
 Requires: perl(URI::Escape)
 # Used by Captive Portal authentication modules
