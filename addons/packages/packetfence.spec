@@ -143,6 +143,26 @@ Requires: perl(Text::CSV_XS)
 # BILLING ENGINE
 Requires: perl(LWP::UserAgent)
 Requires: perl(HTTP::Request::Common)
+# Catalyst
+Requires: perl(Catalyst::Runtime), perl(Catalyst::Plugin::ConfigLoader)
+Requires: perl(Catalyst::Plugin::Static::Simple), perl(Catalyst::Action::RenderView)
+Requires: perl(Config::General), perl(Catalyst::Plugin::StackTrace)
+Requires: perl(Catalyst::Plugin::Session), perl(Catalyst::Plugin::Session::Store::File)
+Requires: perl(Catalyst::Plugin::Session::State::Cookie)
+Requires: perl(Catalyst::View::TT), perl(Catalyst::Plugin::StatusMessage)
+Requires: perl(Catalyst::View::JSON), perl(Log::Log4perl::Catalyst)
+Requires: perl(Catalyst::Plugin::Authentication)
+Requires: perl(Catalyst::Authentication::Credential::HTTP)
+Requires: perl(Catalyst::Authentication::Store::Htpasswd)
+Requires: perl(Catalyst::Controller::HTML::FormFu)
+# for Catalyst stand-alone server
+Requires: perl(Catalyst::Devel)
+# these are probably missing dependencies for the above. 
+# I shall file upstream tickets to openfusion before we integrate
+Requires: perl(Plack), perl(Plack::Middleware::ReverseProxy)
+Requires: perl(MooseX::Types::LoadableClass)
+# configuration-wizard
+Requires: perl(IO::Interface::Simple)
 #
 # TESTING related
 #
