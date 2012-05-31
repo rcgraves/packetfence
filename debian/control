@@ -49,7 +49,7 @@ Depends: ${misc:Depends}, apache2, apache2.2-common, apache2-utils,
  gettext, vlan, libsoap-lite-perl, libio-interface-perl, libcatalyst-perl,
  libcatalyst-perl, libcatalyst-modules-perl,libcatalyst-view-tt-perl,
  libhtml-formfu-perl, libjson-perl, libmodule-install-perl,
- libcatalyst-plugin-statusmessage-perl, libauthen-htpasswd-perl,
+ libauthen-htpasswd-perl,
  libcatalyst-authentication-credential-http-perl,
  libcatalyst-authentication-store-htpasswd-perl,libnet-route-perl,
  libcatalyst-engine-http-prefork-perl
