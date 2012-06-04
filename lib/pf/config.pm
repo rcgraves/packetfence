@@ -262,7 +262,7 @@ sub load_config {
         readPfConfigFiles();
 
         # Captive Portal constants
-        Readonly %CAPTIVE_PORTAL => (
+        %CAPTIVE_PORTAL = (
             "NET_DETECT_INITIAL_DELAY" => floor($Config{'trapping'}{'redirtimer'} / 4),
             "NET_DETECT_RETRY_DELAY" => 2,
             "NET_DETECT_PENDING_INITIAL_DELAY" => 2 * 60,
