@@ -241,7 +241,11 @@ our $BANDWIDTH_DIRECTION_RE = qr/IN|OUT|TOT/;
 our $BANDWIDTH_UNITS_RE = qr/B|KB|MB|GB|TB/;
 
 # constants are done, let's load the configuration
-load_config();
+try {
+    load_config();
+} catch {
+    $logger->logdie("Fatal error preventing configuration to load. Please review your configuration. Error: $_");
+};
 
 =head1 SUBROUTINES
 
@@ -257,26 +261,19 @@ multi-threaded daemons.
 =cut
 sub load_config {
 
-    try {
+    readPfConfigFiles();
 
-        readPfConfigFiles();
+    # Captive Portal constants
+    %CAPTIVE_PORTAL = (
+        "NET_DETECT_INITIAL_DELAY" => floor($Config{'trapping'}{'redirtimer'} / 4),
+        "NET_DETECT_RETRY_DELAY" => 2,
+        "NET_DETECT_PENDING_INITIAL_DELAY" => 2 * 60,
+        "NET_DETECT_PENDING_RETRY_DELAY" => 30,
+        "TEMPLATE_DIR" => "$install_dir/html/captive-portal/templates",
+    );
 
-        # Captive Portal constants
-        %CAPTIVE_PORTAL = (
-            "NET_DETECT_INITIAL_DELAY" => floor($Config{'trapping'}{'redirtimer'} / 4),
-            "NET_DETECT_RETRY_DELAY" => 2,
-            "NET_DETECT_PENDING_INITIAL_DELAY" => 2 * 60,
-            "NET_DETECT_PENDING_RETRY_DELAY" => 30,
-            "TEMPLATE_DIR" => "$install_dir/html/captive-portal/templates",
-        );
-
-        readNetworkConfigFile();
-        readFloatingNetworkDeviceFile();
-
-    } catch {
-
-        $logger->logdie("Fatal error preventing configuration to load. Please review your configuration. Error: $_");
-    };
+    readNetworkConfigFile();
+    readFloatingNetworkDeviceFile();
 }
 
 =item readPfConfigFiles -  pf.conf.defaults & pf.conf
