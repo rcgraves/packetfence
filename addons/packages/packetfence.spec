@@ -67,7 +67,9 @@ Requires: php-pear-Log
 Requires: net-tools
 Requires: net-snmp >= 5.3.2.2
 Requires: mysql, perl(DBD::mysql)
-Requires: perl >= 5.8.8, perl-suidperl
+Requires: perl >= 5.8.8
+# replaces the need for perl-suidperl which was deprecated in perl 5.12 (Fedora 14)
+Requires: packetfence-pfcmd-suid
 Requires: perl(Bit::Vector)
 Requires: perl(CGI::Session), perl(JSON), perl(PHP::Session)
 Requires: perl(Class::Accessor)
@@ -155,8 +157,6 @@ Requires: perl(Test::Pod), perl(Test::Pod::Coverage), perl(Test::Exception)
 Requires: perl(Test::NoWarnings)
 # required for the fake CoA server
 Requires: perl(Net::UDP)
-# required for fake perl-suid
-Requires: packetfence-perl-suid
 
 %description
 
@@ -194,14 +194,15 @@ Summary: Configuration pack for FreeRADIUS 2
 The freeradius2-packetfence package contains the files needed to
 make FreeRADIUS properly interact with PacketFence
 
-%package perl-suid
+%package pfcmd-suid
 Group: System Environment/Daemons
 BuildRequires: gcc
+Requires: packetfence >= 3.4.0
 AutoReqProv: 0
 Summary: Replace pfcmd by a C wrapper for suid
 
-%description perl-suid
-The packetfence-perl-suid is a C wrapper to replace perl-suid dependencie.
+%description pfcmd-suid
+The packetfence-pfcmd-suid is a C wrapper to replace perl-suidperl dependency.
 See https://bugzilla.redhat.com/show_bug.cgi?id=611009
 
 %prep
@@ -768,7 +769,7 @@ fi
 %config(noreplace)                         /etc/raddb/sites-available/packetfence-soh
 %config(noreplace)                         /etc/raddb/sites-available/packetfence-tunnel
 
-%files perl-suid
+%files pfcmd-suid
 %attr(6755, root, root) /usr/local/pf/bin/pfcmd
 
 %changelog
